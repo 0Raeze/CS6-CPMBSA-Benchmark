@@ -22,6 +22,9 @@ class StandardBSA:
         best_pos = pop[best_idx].copy()
         best_fit = float(fit[best_idx])
 
+        # Initialize convergence curve
+        convergence_curve = []
+
         # --- Main Loop ---
         for _ in range(self.max_iters):
             # Create historical population (BSA memory)
@@ -51,6 +54,9 @@ class StandardBSA:
             if fit[cur_best_idx] < best_fit:
                 best_fit = float(fit[cur_best_idx])
                 best_pos = pop[cur_best_idx].copy()
-
-        return best_fit, best_pos
+        
+            # Append to convergence curve
+            convergence_curve.append(best_fit)
+                
+        return best_fit, best_pos, convergence_curve
 
