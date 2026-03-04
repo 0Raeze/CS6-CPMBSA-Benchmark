@@ -25,6 +25,9 @@ class FA:
         gbest_pos = pop[np.argmin(fitness)].copy()
         gbest_fit = np.min(fitness)
         
+        # Initialize convergence curve
+        convergence_curve = []
+
         # Main Generation Loop
         for gen in range(self.max_gens):
             # The O(N^2) double loop: Compare every firefly to every other firefly
@@ -60,5 +63,8 @@ class FA:
             if current_best_fit < gbest_fit:
                 gbest_fit = current_best_fit
                 gbest_pos = pop[np.argmin(fitness)].copy()
+        
+            # Append to convergence curve
+            convergence_curve.append(gbest_fit)
                 
-        return gbest_fit, gbest_pos
+        return gbest_fit, gbest_pos, convergence_curve

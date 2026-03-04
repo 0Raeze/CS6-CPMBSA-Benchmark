@@ -24,6 +24,9 @@ class PSO:
         gbest_pos = pbest_pos[np.argmin(pbest_fit)]
         gbest_fit = np.min(pbest_fit)
         
+        # Initialize convergence curve
+        convergence_curve = []
+
         # Main Loop
         for _ in range(self.max_iters):
             r1, r2 = np.random.rand(2)
@@ -47,5 +50,8 @@ class PSO:
             if np.min(pbest_fit) < gbest_fit:
                 gbest_fit = np.min(pbest_fit)
                 gbest_pos = pbest_pos[np.argmin(pbest_fit)]
-                
-        return gbest_fit, gbest_pos
+            
+            # Append to convergence curve
+            convergence_curve.append(gbest_fit)
+            
+        return gbest_fit, gbest_pos, convergence_curve
